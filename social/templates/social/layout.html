@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Django Social</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../../static/normalize.css">
+	<link rel="stylesheet" type="text/css" href="../../static/styleLayout.css">
+</head>
+<body>
+
+	<header class="main-head">
+		<nav class="main">
+			<h1 id="logo">Hola</h1>
+			<ul>
+				<li><a href="#">Logout</a></li>
+				<li><a href="#">Register</a></li>
+				<li><a href="#">Login</a></li>
+			</ul>
+		</nav>
+	</header>
+	{% comment %} Navbar {% endcomment %}
+	<div class="main">
+		
+		<nav class="second-nav">
+			<a class="feed" href="#">Inicio</a>
+			<a class="profile" href="#">Mi Perfil</a>
+			<a class="new" href="#">Crear nuevo post</a>
+		</nav>
+
+
+		{% block content %}
+
+		{% endblock content %}
+
+
+
+	</div>
+
+	
+
+</body>
+</html>
