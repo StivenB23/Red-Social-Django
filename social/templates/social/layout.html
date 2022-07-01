@@ -6,15 +6,40 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="{% static 'normalizr.css'%}">
-	<link rel="stylesheet" type="text/css" href="{% static 'styleLayout.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 </head>
 <body>
-
-	<header class="main-head">
-		<nav class="main">
+	<nav class="navbar navbar-expand-lg bg-light">
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="#">RED SOCIAL</a>
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+			<ul class="navbar-nav">
+				{% if request.user.is_authenticated %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'logout' %}">Logout <i class="bi bi-door-open-fill"></i></a>
+					</li>
+				{% else %}
+					
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'register' %}">Register <i class="bi bi-person-plus-fill"></i></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'login' %}">Login </a>
+					</li>
+				{% endif %}
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+		{% comment %}<nav class="main">
 			<h1 id="logo">Hola</h1>
 			<ul>
-				{% comment %} Si esta logueado se muestra logout {% endcomment %}
+				 Si esta logueado se muestra logout 
 				{% if request.user.is_authenticated %}
 					<li><a href="{% url 'logout' %}">Logout</a></li>
 				{% else %}
@@ -22,8 +47,7 @@
 					<li><a href="{% url 'login' %}">Login</a></li>
 				{% endif %}
 			</ul>
-		</nav>
-	</header>
+		</nav>{% endcomment %}
 	{% if  messages %}
 		{% for  message in messages  %}
 			<div class="notification {{message.tags}}">
@@ -32,23 +56,23 @@
 		{% endfor %}
 	{% endif %}
 	{% comment %} Navbar {% endcomment %}
-	<div class="main">
-		
-		<nav class="second-nav">
-			<a class="feed" href="{% url 'feed' %}">Inicio</a>
-			{% if request.user.is_authenticated %}
-				<a class="profile" href="#">Mi Perfil</a>
-				<a class="new" href="#">Crear nuevo post</a>
-			{% endif %}
-		</nav>
-
-
+	<div class="panel">
+		<div class="panel__post shadow regular" >
+			<nav class="second-nav">
+				<a class="feed" href="{% url 'feed' %}">Inicio</a>
+				{% if request.user.is_authenticated %}
+					<a class="profile" href="{% url 'profile' request.user.username %}">Mi Perfil</a>
+					<a class="new" href="{% url 'post' %}">Crear post <i class="bi bi-plus-circle-fill"></i></a>
+				{% endif %}
+			</nav>
+			
+			
+	
 		{% block content %}
 
-		{% endblock content %}
-
-
-
+		{% endblock content %}		
+		
+		</div>
 	</div>
 
 	
